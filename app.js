@@ -11,9 +11,6 @@ app.use(express.json());
 
 const bookmarksController = require("./controllers/bookmarkController.js");
 app.use("/bookmarks", bookmarksController);
-const reviewsController = require("./controllers/reviewsController.js");
-app.use("/reviews", reviewsController);
-
 
 // ROUTES
 app.get("/", (req, res) => {

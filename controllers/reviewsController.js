@@ -9,16 +9,27 @@ const {
 } = require("../queries/reviews");
 const { getBookmark } = require("../queries/bookmarks");
 
+const reviewsController = require("./reviewsController.js");
+bookmarks.use("/:bookmarkId/reviews", reviewsController);
 
 //INDEX
 reviews.get("/", async (req, res) => {
-  const allReviews = await getAllReviews();
-  if (allReviews[0]) {
-    res.status(200).json(allReviews);
-  } else {
-    res.status(500).json({ error: "server error" });
+  const { bookmarkId } = req.params; //req.params
+  try {
+    const allReviews = await getAllReviews(bookmarkId);
+    res.json(allReviews)
+  } catch (err) {
+    res.json(err)
   }
 });
+
+//   const allReviews = await getAllReviews();
+//   if (allReviews[0]) {
+//     res.status(200).json(allReviews);
+//   } else {
+//     res.status(500).json({ error: "server error" });
+//   }
+// });
 
 // SHOW
 reviews.get("/:id", async (req, res) => {

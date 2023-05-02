@@ -9,7 +9,7 @@ const db = require("../db/dbConfig.js");
 //       }
 //     };
 
-const getAllReviews = async () => {
+const getAllReviews = async (id) => {
   try {
     const allReviews = await db.any("SELECT * FROM reviews");
     return allReviews;
